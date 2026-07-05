@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #fdfdfd;
+  --text-primary: #050505;
+  --text-secondary: #555555;
+  --border-primary: #f0f0f0;
+}
+
+.dark {
+  --bg-primary: #0b0b0c;
+  --bg-secondary: #141416;
+  --text-primary: #fcfcfc;
+  --text-secondary: #a0a0a0;
+  --border-primary: #1c1c1e;
+}
+
+@layer base {
+  body {
+    @apply bg-primary text-primary selection:bg-accent-indigo selection:text-white transition-colors duration-300;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.25);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.4);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.45);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(75, 85, 99, 0.6);
+}
+
+/* Grid overlay background */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(156, 163, 175, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(156, 163, 175, 0.04) 1px, transparent 1px);
+}
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+
+/* iOS Safe Areas & dvh utility additions */
+.safe-bottom-padding {
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+
+.min-h-dvh {
+  min-height: 100dvh;
+}
+
+.h-dvh {
+  height: 100dvh;
+}
+
+/* GPU Hardware Acceleration for Animation Performance */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
