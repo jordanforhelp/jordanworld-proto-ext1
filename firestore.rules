@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{username} {
+      allow read: if true; // Anyone can read profiles
+      // Creating a profile requires being logged in and matching the UID in the document
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      // Updating/deleting a profile requires being the owner
+      allow update: if request.auth != null && resource.data.uid == request.auth.uid && request.resource.data.uid == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+  }
+}
